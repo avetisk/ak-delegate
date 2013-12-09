@@ -1,4 +1,4 @@
-/*global describe, it*/
+/*global describe, it, FocusEvent*/
 
 'use strict';
 
@@ -21,7 +21,7 @@ document.body.innerHTML +=
         '<div class="l-4" id="l-4-1"></div>' +
         '<div class="l-4" id="l-4-2"></div>' +
         '<div class="l-4" id="l-4-3"></div>' +
-        '<div class="l-4" id="l-4-4"></div>' +
+        '<div class="l-4" id="l-4-4"><input /></div>' +
       '</div>' +
     '</div>' +
   '</div>'
@@ -48,6 +48,18 @@ describe('delegate', function () {
     if (counter1 === 1 && counter2 === 1) {
       done();
     }
+  });
+
+  it('#on(".l-3 input", "focus"), #off(".l-3 input", "focus")', function (done) {
+    var fn = delegate.on(document.body, '.l-3 input', 'focus', function () {
+      done();
+    });
+
+    var input = document.querySelector('.l-3 input');
+    input.dispatchEvent(new FocusEvent('focus'));
+    input.dispatchEvent(new FocusEvent('blur'));
+    delegate.off(document.body, 'focus', fn);
+    input.dispatchEvent(new FocusEvent('focus'));
   });
 
   it('#on(".d-2", ".l-2 .l-4"), #off(".d-2")', function (done) {

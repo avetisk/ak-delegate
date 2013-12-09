@@ -1,6 +1,20 @@
 'use strict';
 
-var matchSelector = Element.prototype.webkitMatchesSelector ? 'webkitMatchesSelector' : 'mozMatchesSelector';
+/**
+ * polyfill CSS matchesSelector()
+ */
+var matchSelector;
+var prototype = Element.prototype;
+
+if (prototype.webkitMatchesSelector) {
+  matchSelector = 'webkitMatchesSelector';
+} else if (prototype.mozMatchesSelector) {
+  matchSelector = 'mozMatchesSelector';
+} else if (prototype.msMatchesSelector) {
+  matchSelector = 'msMatchesSelector';
+} else {
+  matchSelector = 'matchesSelector';
+}
 
 /**
  * Export `off`
@@ -13,8 +27,12 @@ var matchSelector = Element.prototype.webkitMatchesSelector ? 'webkitMatchesSele
  * @return {Function} use it to undelegate
  */
 module.exports.on = function (el, selector, event, callback, capture) {
+  if (event === 'focus' || event === 'blur') {
+    capture = true;
+  }
+
   var fn = function (e) {
-    if (! e.target[matchSelector](selector)) {
+    if (! e.target[matchSelector](selector) || e.type !== event) {
       return;
     }
 
@@ -35,5 +53,9 @@ module.exports.on = function (el, selector, event, callback, capture) {
  * @param {Boolean} capture (optional)
  */
 module.exports.off = function (el, event, callback, capture) {
+  if (event === 'focus' || event === 'blur') {
+    capture = true;
+  }
+
   el.removeEventListener(event, callback, capture || false);
 };
