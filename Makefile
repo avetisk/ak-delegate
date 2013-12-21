@@ -9,7 +9,7 @@ clean:
 	@rm -fr ./lib-cov
 
 buildtest:
-	@./node_modules/.bin/browserify -d ./test/index.js > ./test/build.js
+	@./node_modules/.bin/browserify -d ./test/index.js -i ./lib-cov/delegate > ./test/build.js
 
 validate:
 	@jshint --config .jshintrc $(JS)
