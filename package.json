@@ -32,8 +32,6 @@
     "karma-mocha": "~0.1.1",
     "karma-safari-launcher": "~0.1.1",
     "karma-firefox-launcher": "~0.1.2",
-    "json2htmlcov": "~0.1.1",
-    "mocha-phantomjs": "~3.3.0",
     "envify": "~1.0.1",
     "karma-coverage": "~0.1.4",
     "istanbul": "~0.2.1"
