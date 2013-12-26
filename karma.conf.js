@@ -45,24 +45,6 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
-    // global config for SauceLabs
-    sauceLabs: {
-      username: 'avetisk-ak-delegate',
-      accessKey: 'bf559cce-ce26-4e0a-b020-4836571c95c8',
-      startConnect: false,
-      testName: 'unit test'
-    },
-
-    // define SL browsers
-    customLaunchers: {
-      'SauceLabs Windows 7 IE 10': {
-        base: 'SauceLabs',
-        browserName: 'internet explorer',
-        version: '10',
-        platform: 'Windows 7'
-      }
-    },
-
     // Start these browsers, currently available:
     // - Chrome
     // - ChromeCanary
@@ -71,7 +53,7 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: ['Chrome', 'Firefox', 'Safari', 'SauceLabs Windows 7 IE 10'],
+    browsers: ['Chrome', 'Firefox', 'Safari'],
 
 
     // If browser does not capture in given timeout [ms], kill it
