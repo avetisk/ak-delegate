@@ -1,4 +1,4 @@
-/*global describe, it, FocusEvent*/
+/*global describe, it*/
 
 'use strict';
 
@@ -56,10 +56,22 @@ describe('delegate', function () {
     });
 
     var input = document.querySelector('.l-3 input');
-    input.dispatchEvent(new FocusEvent('focus'));
-    input.dispatchEvent(new FocusEvent('blur'));
+
+    // TODO use `input.focus();` when retarded Firefox & IE will handle it
+    var e = document.createEvent('HTMLEvents');
+    e.initEvent('focus', true, true);
+    input.dispatchEvent(e);
+
+    // TODO use `input.blur();` when retarded Firefox & IE will handle it
+    e = document.createEvent('HTMLEvents');
+    e.initEvent('blur', true, true);
+    input.dispatchEvent(e);
     delegate.off(document.body, 'focus', fn);
-    input.dispatchEvent(new FocusEvent('focus'));
+
+    // TODO use `input.focus();` when retarded Firefox & IE will handle it
+    e = document.createEvent('HTMLEvents');
+    e.initEvent('focus', true, true);
+    input.dispatchEvent(e);
   });
 
   it('#on(".d-2", ".l-2 .l-4"), #off(".d-2")', function (done) {
