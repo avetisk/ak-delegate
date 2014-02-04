@@ -122,4 +122,14 @@ describe('delegate', function () {
       done();
     }
   });
+
+  it('#on(".d-2 .l-3"), #click(".l-4")', function (done) {
+    var d2 = document.body.querySelector('.d-2');
+
+    delegate.on(d2, '.l-3', 'click', function () {
+      done();
+    });
+
+    document.querySelector('.d-2 .l-4').click();
+  });
 });
