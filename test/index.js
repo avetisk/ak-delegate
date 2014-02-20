@@ -2,7 +2,7 @@
 
 'use strict';
 
-var delegate = require('../');
+var delegate = process.env.AK_DELEGATE_TEST_COVERAGE ? require('../lib-cov/delegate') : require('../');
 
 document.body.innerHTML +=
   '<div class="l-1 d-1">' +
